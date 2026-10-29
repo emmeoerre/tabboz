@@ -30,6 +30,8 @@
 .about-warning .mobile-control { min-width:0; }
 .about-contact { display:flex; flex-direction:column; gap:4px; }
 .about-contact .mobile-control { overflow-wrap:anywhere; }
+/* Both the original port and this mobile refit remain directly accessible. */
+.about-project-link { display:flex; align-items:center; min-height:30px; color:var(--highlight,#000080); font-size:13px; line-height:1.3; overflow-wrap:anywhere; }
 .about-contact button { margin-top:3px; min-height:40px; }
 .about-layout .mobile-dialog-actions { margin-top:0; padding-top:6px; padding-bottom:6px; }
 @media (max-height:600px) {

@@ -52,7 +52,18 @@
     const warning=el("div","about-warning");
     put(warning,take(node=>node.matches("img") && node.getAttribute("src").includes("REDBABY")),take(node=>node.textContent.includes("Questo programma contiene")));
     const contact=el("div","about-contact");
-    put(contact,take(node=>node.textContent.trim().startsWith("http://")),take(node=>node.textContent.trim().startsWith("e-mail:")),control(113));
+    const originalSite=take(node=>node.textContent.trim().startsWith("http://"));
+    const originalLink=el("a","about-project-link");
+    originalLink.href="https://github.com/andreax79/tabboz";
+    originalLink.target="_blank";
+    originalLink.rel="noopener noreferrer";
+    if(originalSite)originalLink.append(originalSite);
+    const mobileLink=el("a","about-project-link");
+    mobileLink.href="https://github.com/emmeoerre/tabboz";
+    mobileLink.target="_blank";
+    mobileLink.rel="noopener noreferrer";
+    mobileLink.textContent="GitHub mobile: emmeoerre/tabboz";
+    put(contact,originalSite?originalLink:null,mobileLink,take(node=>node.textContent.trim().startsWith("e-mail:")),control(113));
     body.append(credits,testers,warning,contact);
     return items.filter(item=>!used.has(item));
   }

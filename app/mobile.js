@@ -238,7 +238,7 @@
     credits.append(element("h3", "", "Obscured Truckware"));
     addOption(credits, "Crediti", 120);
     addOption(credits, "Logo", 121);
-    const note = element("p", "options-note", "Tabboz Simulator 0.92q · Andrea Bonomi, Emanuele Caccialanza e Daniele Gazzari. ");
+    const note = element("p", "options-note", "Tabboz Simulator 0.92q · Andrea Bonomi, Emanuele Caccialanza e Daniele Gazzarri. ");
     const sourceLink = element("a", "", "Codice e licenze");
     sourceLink.href = "../NOTICE.md";
     sourceLink.target = "_blank";

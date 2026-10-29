@@ -2,7 +2,7 @@
 
 A mobile browser interface for Tabboz Simulator, preserving the original Italian game, artwork, sounds and C game logic. The interface adapts the original dialogs and controls to a phone screen; the game runs as WebAssembly without a backend.
 
-Publication target: [Play Tabboz Simulator](https://emmeoerre.github.io/tabboz/) (deployment being prepared).
+[Play Tabboz Simulator](https://emmeoerre.github.io/tabboz/)
 
 ## Credits
 
