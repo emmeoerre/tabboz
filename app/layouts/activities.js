@@ -135,63 +135,35 @@
     const status = node("div", "activity-status activity-status-two");
     c.append(status, c.stat("Reputazione:",105), c.stat("Soldi:",104));
 
-    const picker = node("div", "activity-subject-picker");
-    const selectLabel = node("label", "activity-subject-label", "Materia");
-    const select = node("select", "activity-subject-select");
-    select.id = c.win.id + "-subject";
-    selectLabel.htmlFor = select.id;
-    const scores = node("div", "activity-subject-scores");
-    scores.setAttribute("aria-label", "Voto");
-    scores.append(node("span", "activity-subject-grade-label", "Voto"));
-    const source = node("div", "activity-source-controls");
-    source.hidden = true;
-    const subjects = [];
+    status.classList.add("activity-school-status");
+    const pagella = node("div", "activity-pagella");
+    pagella.setAttribute("role", "radiogroup");
+    pagella.setAttribute("aria-label", "Pagella");
     for (let offset=0; offset<9; offset++) {
-      const choiceEntry = c.item(110+offset);
+      const choice = c.take(c.item(110+offset));
       const score = c.control(120+offset);
-      const choice = c.take(choiceEntry);
       if (!choice || !score) continue;
       const radio = choice.querySelector("input");
-      const label = choice.querySelector("label");
-      const option = node("option");
-      option.value = String(offset);
-      select.append(option);
-      score.classList.add("activity-value","activity-subject-score");
-      score.hidden = offset !== 0;
-      scores.append(score);
-      source.append(choice);
-      subjects.push({ radio, label, option, score });
-    }
-    function synchronize() {
-      const checked = subjects.findIndex(subject => subject.radio.checked);
-      if (checked >= 0 && select.selectedIndex !== checked) select.selectedIndex = checked;
-      subjects.forEach((subject, index) => {
-        const name = subject.label.textContent.trim().replace(/:$/, "");
-        const text = name;
-        if (subject.option.textContent !== text) subject.option.textContent = text;
-        subject.option.disabled = subject.radio.disabled;
-        subject.score.hidden = index !== select.selectedIndex;
+      choice.classList.add("activity-subject-option");
+      score.classList.add("activity-value", "activity-subject-grade");
+      score.hidden = false;
+      score.id = c.win.id + "-grade-" + offset;
+      radio.setAttribute("aria-describedby", score.id);
+      choice.append(score);
+      // Label and keyboard interactions use the native radio. The rest of the
+      // toggle cell forwards to that same control, including taps on its grade.
+      choice.addEventListener("click", event => {
+        if (event.target.closest("input,label")) return;
+        event.stopPropagation();
+        if (!radio.disabled) radio.click();
       });
-      select.disabled = subjects.length > 0 && subjects.every(subject => subject.radio.disabled);
+      pagella.append(choice);
     }
-    select.addEventListener("change", event => {
-      event.stopPropagation();
-      const subject = subjects[select.selectedIndex];
-      if (subject) subject.radio.click();
-      synchronize();
-    });
-    select.addEventListener("focus", synchronize);
-    source.addEventListener("change", synchronize);
-    new MutationObserver(synchronize).observe(scores, { childList:true, characterData:true, subtree:true });
-    new MutationObserver(synchronize).observe(source, { childList:true, characterData:true, subtree:true });
-    picker.append(selectLabel, select, scores, source);
     const actions = c.actions([103,102,101], "activity-school-actions");
-    c.body.append(top, status, picker, actions);
+    c.body.append(top, status, pagella, actions);
     const extras = node("div", "activity-tiny-icons");
     c.spareIcons(extras);
     if (extras.children.length) c.body.append(extras);
-    synchronize();
-    requestAnimationFrame(synchronize);
     return c.finish();
   }
 

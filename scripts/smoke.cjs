@@ -104,8 +104,17 @@ async function assertFits(page, label) {
     await page.locator(".activity-grid .control136").click();
     await page.waitForFunction(() => document.querySelector(".mobile-main").inert);
     let win = await active(page);
-    await win.getByRole("button", { name: /^Studia / }).click();
+    assert.equal(await win.locator(".activity-subject-grade").count(), 9, "All subject grades are on the pagella");
+    for (const grade of await win.locator(".activity-subject-grade").all()) {
+      assert.equal(await grade.isVisible(), true, "Grades are visible before selecting a subject");
+    }
+    await win.locator(".activity-subject-option:has(input.control111) label").click();
+    await page.waitForFunction(() => document.querySelector('[data-dialog-id="10"] button.control103').textContent.includes("Fisica"));
+    assert.equal(await win.locator("input.control111").isChecked(), true, "The pagella selects the original Fisica radio");
+    await win.getByRole("button", { name: "Studia Fisica", exact: true }).click();
     const school = await dismissUntilDialog(page, 10);
+    assert.equal((await school.locator(".control121").innerText()).trim(), "1", "Study updates the selected subject's original grade");
+    assert.equal((await school.locator(".control120").innerText()).trim(), "0", "The other subject's grade stays unchanged");
     await page.waitForFunction(before => document.querySelector('[data-dialog-id="10"] .calendar-date').textContent !== before, dayBefore);
     assert.equal(await school.locator(".calendar-date").isVisible(), true, "Calendar advances before leaving school");
     await returnToMain(page);

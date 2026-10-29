@@ -6,7 +6,7 @@ The mobile adapter groups original controls into activity panels, catalogs, form
 
 - Classic navy title bars and neutral gray surfaces replace the teal theme. Selections, status bars and text use neutral colors; original artwork remains unchanged.
 - Message popups have a raised, beveled Windows border and a small shadow. Real message creation and dismissal were checked at 320x568, 360x640 and 390x700.
-- School uses a native subject picker that forwards selection to the original radio and displays the corresponding original grade. Study and other actions remain original buttons.
+- School shows a two-column pagella of nine selectable subject/grade cells with classic raised/pressed styling. Every grade is visible before selecting a subject. The original radios, labels, grade nodes and action buttons remain the live engine controls; actions sit below the pagella.
 - Activity status panels put money, reputation, scooter specifications, job details and partner information alongside compact action grids.
 - Shops show compact catalogs and the selected item's original description. Phone ownership, carrier, credit, gym membership and scooter sale/upgrade details retain their live engine fields.
 - Settings keep the original skill and miscellaneous groups in tabs. Work questionnaires show the complete original introduction and all three questions in one readable scrolling page. Submit follows question C in normal flow; there are no questionnaire tabs or sticky submit overlays.
@@ -33,7 +33,7 @@ Additional bounded checks covered:
 - Empty and populated scooter, job and partner screens, including both character genders.
 - An actual scooter purchase while the parent Scooter screen was already open: its initially blank fields filled immediately in the same window, still without scrolling. Park/use toggles also worked.
 - A real breakup: the existing partner fields cleared in the same screen, retaining visible containers rather than stale details.
-- Selecting Fisica forwarded to the original radio; studying advanced its grade from 0 to 1 and advanced the date. Selecting Agraria then showed its unchanged grade of 0.
+- Pagella selection through the subject label, grade cell and native arrow keys reaches the original radios. Studying Fisica advances only its grade from 0 to 1, advances the calendar, and survives reload. All nine grades stay visible at 320x568, 360x640 and 390x700.
 - Profile saving, settings persistence and reset-form gender/capacity changes.
 
 Initially empty nodes remain connected, and selection visibility updates when the original controls change. Hidden native questionnaire inputs are positioned within their answer rows so browser focus follows the scrolled answer.

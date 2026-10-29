@@ -79,12 +79,29 @@
 .activity-layout .activity-school-overview { display:grid; grid-template-columns:88px minmax(0,1fr); align-items:center; gap:10px; }
 .activity-layout .activity-school-art .activity-artwork { max-width:88px; max-height:55px; }
 .activity-layout .activity-school-total .activity-value { font-size:18px; }
-.activity-layout .activity-subject-picker { display:grid; grid-template-columns:minmax(0,1fr) 50px; gap:5px 8px; min-width:0; }
-.activity-layout .activity-subject-label { grid-column:1/-1; font-size:12px; color:var(--muted,#5a5a5a); }
-.activity-layout .activity-subject-select { width:100%; height:44px; min-height:44px; padding:8px 30px 8px 10px; font-size:15px; }
-.activity-layout .activity-subject-scores { display:flex; flex-direction:column; gap:1px; align-items:center; justify-content:center; border:1px solid #aaaaaa; background:#e7e7e7; }
-.activity-layout .activity-subject-score { margin:0; min-height:0; font-size:18px; line-height:1.2; }
-.activity-layout .activity-source-controls { display:none !important; }
+.activity-school .activity-school-status .activity-metric { display:flex; flex-wrap:wrap; align-items:baseline; gap:3px 6px; padding:5px 7px; }
+.activity-school .activity-school-status .activity-metric-caption .mobile-control { font-size:11px; }
+.activity-school .activity-school-status .activity-value { margin:0 0 0 auto; font-size:14px; }
+.activity-pagella { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:4px; }
+.activity-school .activity-subject-option {
+  position:relative; display:grid; grid-template-columns:minmax(0,1fr) 27px; gap:5px;
+  min-width:0; min-height:44px; width:auto; padding:5px 6px; border:0;
+  background:#d4d0c8; box-shadow:inset -1px -1px #0a0a0a,inset 1px 1px #fff,inset -2px -2px #808080,inset 2px 2px #dfdfdf;
+  cursor:pointer;
+}
+.activity-school .activity-subject-option:has(input:checked) {
+  background:#e7e7e7; box-shadow:inset 1px 1px #0a0a0a,inset -1px -1px #fff,inset 2px 2px #808080,inset -2px -2px #dfdfdf;
+}
+.activity-school .activity-subject-option input[type="radio"] { position:absolute; left:6px; top:50%; width:13px; height:13px; transform:translateY(-50%); }
+.activity-school .activity-subject-option label { margin:0; padding:0; min-height:32px; font-size:12px; line-height:1.2; }
+.activity-school .activity-subject-option label::before,
+.activity-school .activity-subject-option label::after { display:none !important; }
+.activity-school .activity-subject-option:has(input:checked) label { font-weight:bold; }
+.activity-school .activity-subject-option .activity-subject-grade {
+  display:flex; align-items:center; justify-content:center; min-height:26px; margin:0;
+  background:#f0f0f0; box-shadow:inset 1px 1px #808080,inset -1px -1px #fff;
+  font-size:16px; line-height:1.2; text-align:center;
+}
 .activity-layout .activity-school-actions .control103 { grid-column:1/-1; }
 .activity-layout .activity-school-actions .activity-command { font-size:13px; }
 .activity-layout .activity-club-choices { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:5px; }
@@ -102,7 +119,12 @@
 }
 
 
-.activity-layout .activity-subject-grade-label { font-size:12px; color:var(--muted,#5a5a5a); line-height:1.1; }
 .activity-layout .activity-model-name[data-empty="true"]::after { content:"Nessuno scooter"; }
 .activity-layout .activity-employer[data-empty="true"]::after { content:"Nessun lavoro"; }
 
+
+@media (max-height:600px) {
+  .activity-school .mobile-dialog-body { gap:6px; padding:8px 10px; }
+  .activity-school .activity-pagella { gap:3px; }
+}
+.activity-school .activity-subject-option:has(input:disabled) { cursor:default; }
