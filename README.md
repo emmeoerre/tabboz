@@ -35,6 +35,8 @@ npm run build:pages
 
 The generated, ignored `dist/` contains runtime assets, licenses and a link to the corresponding source revision. Archived Windows binaries and raw game sources remain in this repository rather than the site package. The compiled engine is committed; the Pages job does not need Docker or Emscripten.
 
+Link previews use static Open Graph/card metadata and `app/share-preview-v1.png`. To regenerate the image from an isolated fresh game's main screen, install the browser-test dependencies and run `npm run render:share`. Sharing URLs in the HTML are absolute so crawlers can find the image without running the game.
+
 ## Saves and offline play
 
 Saves are stored in the browser's localStorage. The interface calls the original C save routine after completed actions when the engine is idle. Confirm profile edits before leaving that screen.

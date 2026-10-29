@@ -1,5 +1,5 @@
 {
-  "version": "1817359fc5b4d5089742",
+  "version": "eff14035e224fe7a12cd",
   "assets": [
     "app/calendar.js",
     "app/dialogs.css",
@@ -17,6 +17,7 @@
     "app/layouts/shops.js",
     "app/mobile.css",
     "app/mobile.js",
+    "app/share-preview-v1.png",
     "engine/resources/bitmaps/1201.png",
     "engine/resources/bitmaps/1202.png",
     "engine/resources/bitmaps/1203.png",

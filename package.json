@@ -16,7 +16,8 @@
     "test:runtime": "node scripts/test-runtime.mjs",
     "test:engine": "node scripts/qa-engine-stress.cjs",
     "test:layouts": "node scripts/qa-layout-gallery.cjs",
-    "build:pages": "node scripts/build-pages.mjs"
+    "build:pages": "node scripts/build-pages.mjs",
+    "render:share": "node scripts/render-share-preview.cjs"
   },
   "devDependencies": {
     "playwright": "1.62.1"

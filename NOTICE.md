@@ -35,3 +35,7 @@ The bundled `engine/resources/css/98.css` identifies itself as version `0.1.20`.
 ## App icons
 
 `app/icon-192.png` and `app/icon-512.png` are nearest-neighbor size conversions of the original `engine/resources/icons/ZARROSIM.gif`. No new character artwork was added.
+
+## Sharing preview
+
+`app/share-preview-v1.png` is a rendering of the mobile main screen's original character artwork and live controls in a fresh, isolated game. `scripts/render-share-preview.cjs` reproduces it using the original icon and bundled interface fonts. The character artwork remains the original authors' work.
