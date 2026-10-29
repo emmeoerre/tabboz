@@ -1,0 +1,198 @@
+--- a/handle.c
++++ b/handle.c
+@@ -69,9 +69,11 @@
+         RESOURCE *h = &global_table->entries[i];
+         if (h->refcount == 0)
+         {
++            // A table slot can previously have held a different resource type.
++            // Never carry freed pointers or control/window state into its reuse.
++            memset(h, 0, sizeof(*h));
+             h->type = type;
+             h->hwndParent = hwndParent;
+-            h->props = NULL;
+             if (type == HANDLE_WINDOW)
+             {
+                 h->window.fEnd = FALSE;
+@@ -80,7 +82,9 @@
+                 if (h->props == NULL)
+                 {
+                     DEBUG_PRINTF("AllocateHandle failed\n");
+-                    free(h);
++                    // h is an entry in the shared table, not a separately
++                    // allocated object. Leave the unused slot available.
++                    memset(h, 0, sizeof(*h));
+                     return NULL;
+                 }
+             }
+@@ -101,35 +105,43 @@
+ void ReleaseHandle(HANDLE p)
+ {
+     RESOURCE *h = (RESOURCE *)p;
+-    if (h != NULL)
++    if (h == NULL || h->refcount == 0)
+     {
+-        DEBUG_PRINTF("ReleaseHandle id=%d refcount=%d type=%d\n", (int)h->handle, h->refcount, h->type);
+-        if (h->refcount > 0)
++        return;
++    }
++    DEBUG_PRINTF("ReleaseHandle id=%d refcount=%d type=%d\n", (int)h->handle, h->refcount, h->type);
++    if (--h->refcount != 0)
++    {
++        return;
++    }
++
++    // hwndParent stores a numeric HWND, not a RESOURCE pointer. Preserve that
++    // identifier before invalidating the slot so its children can be found.
++    HWND handle = h->handle;
++    HandleType type = h->type;
++    LPSTR className = h->lpClassName;
++    PROPERTIES *props = h->props;
++    memset(h, 0, sizeof(*h));
++
++    if (type == HANDLE_WINDOW && handle != NULL && global_table != NULL)
++    {
++        for (int i = 0; i < global_table->count; i++)
+         {
+-            h->refcount--;
+-            if (h->refcount == 0)
++            RESOURCE *child = &global_table->entries[i];
++            if (child->refcount > 0 && child->hwndParent == handle)
+             {
+-                h->handle = 0;
+-                free(h->lpClassName);
+-                if (h->props != NULL)
+-                {
+-                    FreeProperties(h->props);
+-                }
+-                if (h->type == HANDLE_WINDOW)
+-                {
+-                    // Remove children
+-                    for (int i = 0; i < global_table->count; i++)
+-                    {
+-                        RESOURCE *child = &global_table->entries[i];
+-                        if ((child->refcount > 0) && (h == child->hwndParent))
+-                        {
+-                            child->refcount = 0;
+-                            child->hwndParent = NULL;
+-                        }
+-                    }
+-                }
++                // Release the parent's ownership through the same destructor,
++                // including nested windows, class strings, and properties.
++                // A separately retained reference must not keep a stale parent.
++                child->hwndParent = NULL;
++                ReleaseHandle(child);
+             }
+         }
++    }
++    free(className);
++    if (props != NULL)
++    {
++        FreeProperties(props);
+     }
+ }
+ 
+--- a/dialog.c
++++ b/dialog.c
+@@ -25,11 +25,17 @@
+     int       dialog = (int)lpTemplateName;
+     int       parentWindowId = -1;
+     MSG       msg;
+-    RESOURCE *res = AllocateHandle(HANDLE_WINDOW, hWndParent);
++    RESOURCE *res;
+ 
+     if (lpDialogFunc == NULL)
+     {
+         return 0;
++    }
++    res = AllocateHandle(HANDLE_WINDOW, hWndParent);
++    if (res == NULL)
++    {
++        // Match the Win32 failure result; never create a window with HWND 0.
++        return -1;
+     }
+     res->lpfnWndProc = (WNDPROC)lpDialogFunc;
+     // Get parent window number
+@@ -49,9 +55,10 @@
+         printf("message: %d, wParam: %d\n", msg.message, msg.wParam);
+         DispatchMessage(&msg);
+     }
+-    // Destroy the window
++    // Capture the result before releasing the table slot and its children.
++    INT_PTR result = res->window.dialogResult;
+     DestroyWindow(res->handle);
+-    return res->window.dialogResult; // the value to be returned to the function that created the dialog box
++    return result;
+ }
+ 
+ //*******************************************************************
+--- a/registry.c
++++ b/registry.c
+@@ -106,6 +106,12 @@
+     }, localStorageKey);
+     // clang-format on
+     RESOURCE *res = AllocateHandle(HANDLE_REGKEY, NULL);
++    if (res == NULL)
++    {
++        free(localStorageKey);
++        *phkResult = NULL;
++        return ERROR_NOT_ENOUGH_MEMORY;
++    }
+     res->regKey.lpSubKey = localStorageKey;
+     *phkResult = (HKEY)res->handle;
+     return status;
+@@ -152,6 +158,12 @@
+         return status;
+     }
+     RESOURCE *res = AllocateHandle(HANDLE_REGKEY, NULL);
++    if (res == NULL)
++    {
++        free(localStorageKey);
++        *phkResult = NULL;
++        return ERROR_NOT_ENOUGH_MEMORY;
++    }
+     res->regKey.lpSubKey = localStorageKey;
+     *phkResult = (HKEY)res->handle;
+     return status;
+@@ -178,6 +190,7 @@
+         return ERROR_INVALID_HANDLE;
+     }
+     free(res->regKey.lpSubKey);
++    res->regKey.lpSubKey = NULL;
+     ReleaseHandle(res);
+     return ERROR_SUCCESS;
+ }
+--- a/resource.c
++++ b/resource.c
+@@ -28,12 +28,22 @@
+     if (IS_INT_RESOURCE(lpResourceName))
+     {
+         // Convert the number into a string
+-        asprintf(&res->lpResourceName, "%d", (int)lpResourceName);
++        if (asprintf(&res->lpResourceName, "%d", (int)lpResourceName) < 0)
++        {
++            res->lpResourceName = NULL;
++            ReleaseHandle(res);
++            return NULL;
++        }
+     }
+     else
+     {
+         // Duplicate the string
+         res->lpResourceName = strdup(lpResourceName);
++        if (res->lpResourceName == NULL)
++        {
++            ReleaseHandle(res);
++            return NULL;
++        }
+     }
+     return res->handle;
+ }
+@@ -54,6 +64,7 @@
+         return FALSE;
+     }
+     free(res->lpResourceName);
++    res->lpResourceName = NULL;
+     ReleaseHandle(res);
+     return TRUE;
+ }

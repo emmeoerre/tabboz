@@ -1,0 +1,15 @@
+{
+  "repository": "https://github.com/andreax79/novantotto",
+  "commit": "12176b4d630bfb2d7426ff8b5ddf81bbc875e550",
+  "gameCommit": "142fa7de71fe3d4700fa0027f18d45c6ccdaa9be",
+  "compiler": {
+    "image": "emscripten/emsdk:3.1.55",
+    "digest": "sha256:0d9172d4b153a9a1067db4c753f8ec1bcb1542bfe1ca61a3c2d9115080b1963f"
+  },
+  "modifiedRuntimeFiles": [
+    "handle.c",
+    "dialog.c",
+    "registry.c",
+    "resource.c"
+  ]
+}

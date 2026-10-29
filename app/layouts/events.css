@@ -1,0 +1,40 @@
+/* Preserve the original art and writing as a compact story card. */
+.event-layout .mobile-dialog-body { display:flex; flex-direction:column; gap:12px; }
+.event-story { display:grid; grid-template-columns:minmax(64px,32%) minmax(0,1fr); gap:14px; align-items:start; padding:12px; border:1px solid #aaaaaa; background:#e7e7e7; }
+.event-story-text-only { grid-template-columns:minmax(0,1fr); }
+.event-story-art { display:flex; flex-direction:column; gap:10px; align-items:center; min-width:0; }
+.mobile-dialog .event-story-art .mobile-art { width:100%; max-width:136px; height:auto; }
+.mobile-dialog .event-story-art .mobile-icon { margin:0 auto; }
+.event-story-copy { min-width:0; }
+.mobile-dialog .event-story-copy .mobile-control { font-size:15px; line-height:1.45; text-align:left; margin:0 0 8px; border:0; }
+.event-story-copy .mobile-control:empty { display:none; }
+.event-story-copy .dlg_item { font-weight:bold; }
+.event-story-actions { display:flex; flex-wrap:wrap; gap:8px; }
+.event-story-actions .mobile-action { flex:1 1 140px; }
+.event-layout .mobile-dialog-actions { margin-top:0; }
+.about-layout .mobile-dialog-body { display:flex; flex-direction:column; gap:8px; padding:10px 12px; }
+.about-layout .mobile-control:not(button) { font-size:13px; line-height:1.3; text-align:left; letter-spacing:0; }
+.about-brand { display:flex; gap:10px; align-items:center; }
+.about-brand-info { display:grid; gap:2px; min-width:0; }
+.about-brand-info .control115 { font-size:12px !important; }
+.about-copyright { display:flex; flex-wrap:wrap; align-items:center; gap:3px 8px; }
+.about-copyright .mobile-icon { width:20px; height:20px; }
+.about-copyright .control116 { font-weight:bold; }
+.mobile-dialog .about-logo { width:auto; max-width:100%; max-height:92px; object-fit:contain; margin:0 auto; }
+.about-credits { display:grid; grid-template-columns:88px minmax(0,1fr); gap:2px 6px; padding-top:6px; border-top:1px solid var(--line); }
+.about-credits > :first-child { grid-row:1 / 4; }
+.about-credits > .dlg_item { grid-column:2; }
+.about-testers { display:flex; flex-wrap:wrap; gap:2px 10px; }
+.about-warning { display:flex; align-items:flex-start; gap:8px; }
+.about-warning .mobile-icon { flex:0 0 24px !important; width:24px; height:24px; }
+.about-warning .mobile-control { min-width:0; }
+.about-contact { display:flex; flex-direction:column; gap:4px; }
+.about-contact .mobile-control { overflow-wrap:anywhere; }
+.about-contact button { margin-top:3px; min-height:40px; }
+.about-layout .mobile-dialog-actions { margin-top:0; padding-top:6px; padding-bottom:6px; }
+@media (max-height:600px) {
+  .about-layout .mobile-dialog-body { gap:6px; }
+  .mobile-dialog .about-logo { max-height:74px; }
+  .about-layout .mobile-control:not(button) { font-size:12px; }
+}
+

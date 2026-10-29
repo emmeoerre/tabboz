@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <base href="./engine/">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#000080">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Tabboz Simulator</title>
+  <link rel="icon" href="resources/icons/ZARROSIM.ico">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="stylesheet" href="resources/css/98.css">
+  <link rel="stylesheet" href="resources/css/novantotto.css">
+  <link rel="stylesheet" href="../app/mobile.css">
+  <link rel="stylesheet" href="../app/dialogs.css">
+  <link rel="stylesheet" href="../app/layouts/activities.css">
+  <link rel="stylesheet" href="../app/layouts/shops.css">
+  <link rel="stylesheet" href="../app/layouts/forms.css">
+  <link rel="stylesheet" href="../app/layouts/events.css">
+  <script src="resources/js/novantotto.js"></script>
+  <script defer src="../app/dialogs.js"></script>
+  <script defer src="../app/layouts/activities.js"></script>
+  <script defer src="../app/layouts/shops.js"></script>
+  <script defer src="../app/layouts/forms.js"></script>
+  <script defer src="../app/layouts/events.js"></script>
+  <script defer src="../app/calendar.js"></script>
+  <script defer src="../app/engine-bridge.js"></script>
+  <script defer src="../app/mobile.js"></script>
+</head>
+<body>
+  <div id="welcome" class="boot-screen">
+    <img src="resources/icons/ZARROSIM.gif" width="32" height="32" alt="">
+    <h1>Tabboz Simulator</h1>
+    <p id="boot-status" role="status">Caricamento…</p>
+    <button id="launch" hidden disabled>Gioca</button>
+  </div>
+  <div class="screen" id="screen" aria-label="Tabboz Simulator" hidden></div>
+  <input id="import-file" type="file" accept=".json,application/json" hidden>
+  <div id="toast" role="status" aria-live="polite" hidden></div>
+  <noscript>Per giocare a Tabboz Simulator è necessario attivare JavaScript.</noscript>
+</body>
+</html>

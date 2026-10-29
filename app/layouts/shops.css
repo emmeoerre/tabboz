@@ -1,0 +1,120 @@
+/* Compact arrangements of original shop controls and artwork. */
+.shop-screen .mobile-dialog-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 10px max(8px, env(safe-area-inset-bottom));
+}
+.shop-screen .mobile-control { font-size: 14px; line-height: 1.35; }
+.shop-screen .mobile-dialog-body > * { flex: 0 0 auto; min-width: 0; }
+.shop-screen .mobile-dialog-actions {
+  position: sticky;
+  bottom: -10px;
+  flex: 0 0 auto;
+  margin-top: auto;
+  padding: 8px 0 max(2px, env(safe-area-inset-bottom));
+  gap: 8px;
+}
+.shop-screen .mobile-action { min-height: 44px; padding: 8px 9px; font-size: 14px; line-height: 1.3; }
+.shop-screen .mobile-row { margin-bottom: 0; }
+.shop-screen .shop-status {
+  display: flex;
+  gap: 8px 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 4px 0 6px;
+  border-bottom: 1px solid #aaaaaa;
+}
+.shop-status:empty { display: none; }
+.shop-status-pair { display: flex; gap: 5px; flex: 1 1 auto; align-items: baseline; }
+.shop-status-pair > :last-child { font-weight: bold; }
+.shop-screen .shop-status-icon { order: -1; max-width: 24px; max-height: 24px; }
+.shop-product-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--shop-columns, 3), minmax(0, 1fr));
+  gap: 6px;
+}
+.shop-product-option {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  padding: 6px 3px 3px;
+  background: #e7e7e7;
+  border: 1px solid #aaaaaa;
+  cursor: pointer;
+}
+.shop-product-option.is-selected { border-color: #808080; background: #eeeeee; box-shadow: inset 0 0 0 1px #808080; }
+.shop-screen .shop-product-option > .mobile-art { width: 100%; height: 98px; object-fit: contain; flex: 0 0 98px; }
+.shop-screen .shop-product-option > .mobile-choice { margin-top: auto; }
+.shop-screen .mobile-choice { min-height: 38px; padding: 3px 4px; }
+.shop-screen .mobile-choice label { min-height: 30px; font-size: 13px; line-height: 1.25; padding-left: 21px; }
+.shop-screen .shop-product-option .mobile-choice { padding: 3px 1px; border: 0; background: transparent; }
+.shop-screen .shop-product-option .mobile-choice label { padding-left: 18px; font-size: 12px; overflow-wrap: normal; }
+.shop-screen .shop-product-option > .mobile-control:not(.mobile-art):not(.mobile-choice) { text-align: center; font-weight: bold; }
+.shop-copy { padding: 9px 10px; background: #eeeeee; border: 1px solid #aaaaaa; min-height: 75px; }
+.shop-product-copy:not([hidden]) ~ .shop-product-copy:not([hidden]) { margin-top: 8px; }
+.shop-product-copy[hidden] { display: none !important; }
+.shop-action-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
+.shop-action-grid > :last-child:nth-child(odd) { grid-column: 1/-1; }
+.shop-facts { display: flex; flex-direction: column; min-width: 0; gap: 0; }
+.shop-facts-row { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.2fr); align-items: baseline; gap: 6px; padding: 5px 0; border-bottom: 1px solid #aaaaaa; }
+.shop-facts-row > :last-child { text-align: right; font-weight: bold; }
+.shop-facts-wide { display: block; }
+.shop-facts-wide > :last-child { text-align: left; }
+.shop-scooter-models .shop-product-option > .mobile-art { height: 75px; flex-basis: 75px; }
+.shop-scooter-models .shop-product-option .mobile-choice label { min-height: 44px; }
+.shop-details-hero { display: flex; align-items: center; gap: 10px; }
+.shop-details-info { flex: 1 1 65%; min-width: 0; }
+.shop-details-info > .mobile-control { font-weight: bold; margin-bottom: 3px; }
+.shop-details-art { flex: 0 1 30%; min-width: 0; }
+.shop-screen .shop-details-art > .mobile-art { width: 100%; height: auto; max-height: 125px; }
+.shop-repair-hero { display: flex; align-items: center; gap: 10px; }
+.shop-screen .shop-repair-hero > .mobile-art { width: 43%; height: auto; flex: 0 1 43%; }
+.shop-repair-hero > :not(img) { flex: 1 1 55%; font-size: 13px; }
+.shop-upgrade-heading { display: flex; align-items: center; gap: 12px; }
+.shop-screen .shop-upgrade-heading > .mobile-art { width: 90px; height: 90px; object-fit: contain; flex: 0 0 90px; }
+.shop-upgrade-heading > .shop-facts { flex: 1 1 auto; }
+.shop-upgrade-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
+.shop-upgrade-option { display: flex; flex-direction: column; align-items: stretch; gap: 5px; padding: 6px; background: #e7e7e7; border: 1px solid #aaaaaa; text-align: center; }
+.shop-upgrade-option > .mobile-control:not(button) { text-align: center; font-weight: bold; }
+.shop-phone .shop-facts-row { padding: 10px 0; }
+.shop-phone-models .shop-product-option > .mobile-art { height: 120px; flex-basis: 120px; }
+.shop-phone-models .shop-product-option .mobile-choice label { min-height: 40px; }
+.shop-subscription { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; padding-bottom: 4px; }
+.shop-subscription > :last-child { font-weight: bold; text-align: right; }
+.shop-carriers { display: flex; flex-direction: column; gap: 7px; }
+.shop-carrier { background: #e7e7e7; border: 1px solid #aaaaaa; padding: 5px 7px; }
+.shop-carrier-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 26px; }
+.shop-screen .shop-carrier-heading .mobile-art { height: 25px; width: auto; max-width: 95px; margin: 0; }
+.shop-screen .shop-carrier-heading > :not(img) { font-size: 12px; text-align: right; }
+.shop-carrier-options { display: grid; grid-template-columns: 1fr 2fr; gap: 6px; }
+.shop-screen .shop-carrier-options > div > .mobile-control:not(.mobile-choice) { font-size: 12px; line-height: 1.2; margin: 3px 0; }
+.shop-refill-options { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 5px; }
+.shop-screen .shop-carrier .mobile-choice { min-height: 36px; padding: 2px 3px; }
+.shop-screen .shop-carrier .mobile-choice label { padding-left: 19px; font-size: 12px; }
+.shop-gym-hero { display: flex; gap: 10px; align-items: center; }
+.shop-screen .shop-gym-hero > .mobile-art { width: 110px; height: 82px; object-fit: contain; flex: 0 1 110px; }
+.shop-gym-info { display: flex; flex-direction: column; gap: 4px; flex: 1 1 55%; min-width: 0; }
+.shop-gym-info > .mobile-control:not(button) { text-align: center; font-size: 13px; }
+.shop-section-heading { font-weight: bold; margin-top: 3px; }
+.shop-gym-prices { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 6px; }
+.shop-lamp { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 12px; align-items: center; }
+.shop-lamp > :last-child { text-align: center; font-weight: bold; }
+@media (max-width: 340px) {
+  .shop-screen .mobile-dialog-body { padding-left: 8px; padding-right: 8px; gap: 7px; }
+  .shop-screen .shop-product-option > .mobile-art { height: 80px; flex-basis: 80px; }
+  .shop-screen .shop-product-option .mobile-choice label { font-size: 11px; }
+  .shop-screen .shop-product-grid { gap: 4px; }
+  .shop-screen .shop-status-pair { gap: 3px; }
+  .shop-screen .shop-status .mobile-control { font-size: 12px; }
+  .shop-screen .shop-carrier .mobile-choice label { font-size: 11px; }
+  .shop-screen .shop-gym-hero > .mobile-art { width: 84px; flex-basis: 84px; }
+}
+.shop-screen .shop-facts .mobile-control.ws_border { border: 0; box-shadow: none; }
+.shop-gym-info > .control107:empty,
+.shop-details-info > .control116:empty { display: none; }
+.shop-upgrade-info { flex: 1 1 auto; min-width: 0; }
+.shop-upgrade-info > .mobile-control { font-weight: bold; margin-bottom: 4px; }
+

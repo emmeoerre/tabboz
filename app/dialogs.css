@@ -1,0 +1,551 @@
+/* Phone-sized views of the original game dialogs. */
+.window.mobile-dialog {
+  box-sizing: border-box;
+  position: fixed !important;
+  inset: 0 !important;
+  width: min(100%, 480px) !important;
+  min-width: 0;
+  height: 100vh !important;
+  height: 100dvh !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+  padding: 0;
+  overflow: hidden;
+  background: #d4d0c8;
+  color: #222222;
+  font-family: "Pixelated MS Sans Serif", Arial, sans-serif;
+  font-size: 15px;
+  box-shadow: none;
+}
+.mobile-dialog .title-bar {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  min-height: calc(40px + env(safe-area-inset-top));
+  padding: calc(2px + env(safe-area-inset-top)) 6px 2px 10px;
+  gap: 8px;
+  align-items: center;
+  background: var(--navy, #000080);
+  color: #fff;
+}
+.mobile-dialog .title-bar-text {
+  min-width: 0;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.25;
+  letter-spacing: 0;
+  white-space: normal;
+}
+.mobile-dialog .title-bar-controls {
+  flex-shrink: 0;
+}
+.mobile-dialog .title-bar-controls button {
+  box-sizing: border-box;
+  width: 36px;
+  min-width: 36px;
+  height: 36px;
+  min-height: 36px;
+  background: #d4d0c8 !important;
+  color: #222222;
+  font-family: Arial, sans-serif;
+  font-size: 23px;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  touch-action: manipulation;
+}
+.mobile-dialog-body {
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  min-height: 0;
+  height: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 !important;
+  padding: 12px 12px max(16px, env(safe-area-inset-bottom));
+  scrollbar-color: #808080 #d4d0c8;
+}
+.mobile-dialog .mobile-decoration {
+  display: none !important;
+}
+.mobile-dialog .mobile-row {
+  display: flex;
+  min-width: 0;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.mobile-dialog .mobile-control {
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+  font-family: inherit;
+  font-size: 15px;
+  line-height: 1.5;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+  text-align: left;
+}
+.mobile-dialog .mobile-control:not(img):not(canvas):not(input):not(button):not(select) {
+  white-space: pre-line;
+}
+.mobile-dialog .mobile-row > .mobile-control {
+  flex: 1 1 auto;
+}
+.mobile-dialog .mobile-row > .mobile-control.ws_border:not(img):not(canvas) {
+  border: 0;
+}
+.mobile-dialog .mobile-pair {
+  align-items: baseline;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 6px 0 9px;
+}
+.mobile-dialog .mobile-pair > .mobile-control:first-child {
+  flex: 1 1 45%;
+}
+.mobile-dialog .mobile-pair > .mobile-control:last-child {
+  flex: 1 1 45%;
+  text-align: right;
+  font-weight: bold;
+}
+.mobile-dialog .mobile-row > .mobile-input {
+  width: 100%;
+}
+.mobile-dialog .mobile-input,
+.mobile-dialog input[type="text"],
+.mobile-dialog select,
+.mobile-dialog textarea {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  background-color: #ffffff;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+}
+.mobile-dialog .mobile-input:disabled,
+.mobile-dialog input:disabled {
+  background-color: #d4d0c8;
+}
+.mobile-dialog .mobile-action,
+.mobile-dialog button.default {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: 46px;
+  padding: 11px 13px;
+  background-color: #e7e7e7;
+  font-family: inherit;
+  font-size: 15px;
+  line-height: 1.4;
+  text-align: center;
+  white-space: normal;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+.mobile-dialog .mobile-action-row > button {
+  flex-basis: 100%;
+}
+.mobile-dialog .button_ok,
+.mobile-dialog .button_cancel,
+.mobile-dialog .button_ok:active,
+.mobile-dialog .button_cancel:active {
+  background-image: none !important;
+  background-color: #e7e7e7 !important;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff,
+    inset -2px -2px #808080, inset 2px 2px #dfdfdf !important;
+}
+.mobile-dialog .mobile-action:active {
+  box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a,
+    inset -2px -2px #dfdfdf, inset 2px 2px #808080 !important;
+}
+.mobile-dialog .mobile-confirm {
+  color: #222222;
+  font-weight: bold;
+}
+.mobile-dialog .mobile-choice-row {
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 0;
+  margin-bottom: 7px;
+}
+.mobile-dialog .mobile-choice {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 46px;
+  padding: 7px 9px;
+  background: #e7e7e7;
+  border: 1px solid #aaaaaa;
+}
+.mobile-dialog .mobile-choice:has(input:checked) {
+  border-color: #808080;
+  background: #eeeeee;
+}
+.mobile-dialog .mobile-choice label {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  min-height: 30px;
+  padding-left: 30px;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.mobile-dialog .mobile-choice label::before {
+  left: 1px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.mobile-dialog .mobile-choice label::after {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.mobile-dialog .mobile-choice input[type="checkbox"]:checked + label::after {
+  left: 4px;
+}
+.mobile-dialog .mobile-choice input[type="radio"]:checked + label::after {
+  left: 5px;
+}
+/* BWCC artwork already contains the original checked mark. */
+.mobile-dialog .mobile-choice input.bwcc:checked + label::after {
+  display: none;
+}
+.mobile-dialog .mobile-choice input:disabled + label {
+  cursor: default;
+}
+.mobile-dialog .mobile-choice-row > .mobile-choice {
+  flex: 1 1 150px;
+  width: auto;
+}
+.mobile-dialog .mobile-choice-row > .mobile-input {
+  flex: 1 1 100%;
+}
+.mobile-dialog .mobile-choice-row > .mobile-control:not(.mobile-choice):not(.mobile-input) {
+  flex: 0 0 auto;
+  min-width: 36px;
+  font-weight: bold;
+  text-align: center;
+}
+.mobile-dialog .mobile-art-row {
+  justify-content: center;
+  margin: 4px 0 16px;
+}
+.mobile-dialog .mobile-art-row > .mobile-art {
+  flex: 0 1 auto;
+}
+.mobile-dialog .mobile-art {
+  display: block;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  margin: 0 auto;
+  background-color: transparent !important;
+  image-rendering: pixelated;
+}
+.mobile-dialog canvas.mobile-art {
+  flex-shrink: 0;
+}
+.mobile-dialog .mobile-icon {
+  flex: 0 0 auto !important;
+  width: auto;
+  height: auto;
+  max-width: 32px;
+  max-height: 32px;
+  image-rendering: pixelated;
+}
+.mobile-dialog .mobile-icon[role="button"] {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  max-width: 44px;
+  max-height: 44px;
+  object-fit: none;
+}
+.mobile-dialog img[role="button"] {
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.mobile-dialog .mobile-dialog-actions {
+  position: sticky;
+  bottom: -12px;
+  display: flex;
+  gap: 10px;
+  padding: 8px 0 max(8px, env(safe-area-inset-bottom));
+  margin-top: 10px;
+  border-top: 1px solid #aaaaaa;
+  background: #d4d0c8;
+  z-index: 1;
+}
+.mobile-dialog-actions > button {
+  flex: 1;
+}
+.mobile-dialog .mobile-products {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+}
+.mobile-dialog .mobile-product {
+  min-width: 0;
+  padding: 16px 14px;
+  border: 1px solid #aaaaaa;
+  background: #e7e7e7;
+}
+.mobile-dialog .mobile-product > .mobile-control {
+  margin-bottom: 12px;
+}
+.mobile-dialog .mobile-product > .mobile-art {
+  margin: 0 auto 14px;
+}
+.mobile-dialog .mobile-product > .mobile-choice {
+  margin-bottom: 12px;
+  border: 0;
+}
+.mobile-dialog fieldset.mobile-control {
+  width: 100%;
+  padding: 0;
+  margin: 12px 0 0;
+  border: 0;
+}
+.mobile-dialog fieldset.mobile-control legend {
+  padding: 0;
+  font-size: 15px;
+  font-weight: bold;
+}
+.window.mobile-dialog.mobile-splash {
+  background: #d4d0c8;
+  box-shadow: none;
+}
+.mobile-dialog.mobile-splash .title-bar {
+  display: flex;
+}
+.mobile-splash .mobile-dialog-body {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 16px;
+}
+.mobile-splash .mobile-splash-action {
+  width: 100%;
+}
+.mobile-reset-source {
+  display: none !important;
+}
+.mobile-splash .mobile-art-row {
+  margin: 0;
+  width: 100%;
+}
+.mobile-splash .mobile-art {
+  max-width: 100%;
+}
+.window.mobile-message {
+  inset: 50% auto auto 50% !important;
+  transform: translate(-50%, -50%);
+  width: min(calc(100% - 24px), 440px) !important;
+  padding: 3px;
+  border: 1px solid #404040;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff,
+    inset -2px -2px #808080, inset 2px 2px #dfdfdf, 3px 3px 0 #0004;
+  height: auto !important;
+  max-height: calc(100vh - 24px);
+  max-height: calc(100dvh - 24px);
+  overflow: hidden;
+}
+.mobile-message .window-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  margin: 0;
+  padding: 18px 16px 16px;
+}
+.mobile-message .container {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.mobile-message .container .icon {
+  flex: 0 0 32px;
+  margin: 3px 0 0;
+}
+.mobile-message .content {
+  min-width: 0;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
+.mobile-message .field-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px !important;
+}
+.mobile-message .field-row button {
+  flex: 1;
+  margin: 0;
+}
+@media (min-width: 480px) {
+  .mobile-dialog .mobile-products {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Inline display:block comes from Win32; keep hidden dialogs hidden. */
+.window.mobile-dialog:not([hidden]) { display: flex !important; flex-direction: column; }
+.dialog-day-strip {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 3px 12px;
+  border-bottom: 1px solid var(--line, #aaaaaa);
+  background: var(--paper, #f0f0f0);
+  color: var(--muted, #5a5a5a);
+  font-size: 11px;
+  line-height: 1.35;
+}
+.dialog-day-strip .calendar-date { font-size: inherit; }
+/* The tobacco counter is a selectable pack gallery, not a stack of artwork. */
+.mobile-dialog[data-dialog-id="88"] .mobile-dialog-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.mobile-dialog[data-dialog-id="88"] .mobile-dialog-body > .mobile-row {
+  flex: 0 0 auto;
+  margin-bottom: 0;
+}
+.mobile-dialog[data-dialog-id="88"] .mobile-dialog-actions {
+  flex: 0 0 auto;
+  position: static;
+  margin-top: 0;
+  padding: 8px 0 max(8px, env(safe-area-inset-bottom));
+}
+.mobile-tobacco-brands {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-content: start;
+  gap: 6px;
+  flex: 1 1 0;
+  min-height: 132px;
+  min-width: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 2px;
+  scrollbar-color: #808080 #d4d0c8;
+}
+.mobile-dialog .mobile-brand-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+  min-width: 0;
+  min-height: 90px;
+  padding: 6px 3px;
+  background: #e7e7e7;
+  border: 1px solid #aaaaaa;
+  box-shadow: inset 1px 1px #fff, inset -1px -1px #808080;
+  color: var(--ink, #222222);
+  font-family: inherit;
+  touch-action: manipulation;
+}
+.mobile-dialog .mobile-brand-button[aria-pressed="true"] {
+  border: 2px solid #222222;
+  padding: 5px 2px;
+  background: #eeeeee;
+  box-shadow: inset 0 0 0 1px #ffffff;
+}
+.mobile-dialog .mobile-brand-button > img {
+  display: block;
+  flex: 0 0 auto;
+  width: auto;
+  height: 54px;
+  max-width: 100%;
+  max-height: 54px;
+  margin: 0;
+  object-fit: contain;
+  image-rendering: pixelated;
+  background: transparent !important;
+  pointer-events: none;
+}
+.mobile-dialog .mobile-brand-name {
+  display: block;
+  min-width: 0;
+  width: 100%;
+  font-size: 11px;
+  line-height: 1.25;
+  text-align: center;
+  overflow-wrap: anywhere;
+  pointer-events: none;
+}
+@media (min-width: 380px) {
+  .mobile-tobacco-brands { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+/* Keep a candidate's actual name, score and description beside the portrait. */
+.mobile-candidate-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 80px;
+  align-items: start;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid #aaaaaa;
+  background: #e7e7e7;
+}
+.mobile-candidate-facts { min-width: 0; }
+.mobile-candidate-field + .mobile-candidate-field { margin-top: 14px; }
+.mobile-candidate-caption {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 4px;
+  margin-bottom: 4px;
+  color: var(--muted, #5a5a5a);
+}
+.mobile-dialog .mobile-candidate-caption .mobile-control {
+  font-size: 12px;
+  line-height: 1.35;
+}
+.mobile-dialog .mobile-candidate-value {
+  border: 0;
+  font-size: 16px;
+  line-height: 1.35;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+.mobile-dialog .mobile-candidate-value.control105,
+.mobile-dialog .mobile-candidate-value.control106 { font-weight: bold; }
+.mobile-candidate-portrait { min-width: 0; }
+.mobile-dialog .mobile-candidate-portrait > .mobile-art {
+  display: block;
+  width: 80px;
+  height: auto;
+  max-width: 100%;
+  margin: 0;
+}
+.mobile-dialog .mobile-candidate-portrait > .mobile-icon {
+  display: block;
+  margin: 8px auto 0;
+}
+.mobile-candidate-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  margin-top: 12px;
+}
+@media (min-width: 360px) {
+  .mobile-candidate-card { grid-template-columns: minmax(0, 1fr) 96px; }
+  .mobile-dialog .mobile-candidate-portrait > .mobile-art { width: 96px; }
+  .mobile-candidate-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

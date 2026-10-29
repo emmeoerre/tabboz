@@ -1,0 +1,10 @@
+node_modules/
+.cache/
+artifacts/
+*.log
+.DS_Store
+Thumbs.db
+dist/
+
+# Machine-specific preview firewall helper stays local.
+scripts/allow-lan-preview.ps1

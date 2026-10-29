@@ -1,0 +1,24 @@
+{
+  "name": "tabboz-mobile",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Tabboz Simulator, refitted for a phone browser with the original game engine.",
+  "license": "GPL-3.0-or-later",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "start": "node scripts/serve.mjs",
+    "check": "node --check app/mobile.js && node --check app/dialogs.js && node --check app/layouts/activities.js && node --check app/layouts/shops.js && node --check app/layouts/forms.js && node --check app/layouts/events.js && node --check app/calendar.js && node --check app/engine-bridge.js && node --check scripts/serve.mjs && node --check service-worker.js",
+    "test": "node scripts/smoke.cjs",
+    "prepare:offline": "node scripts/prepare-offline.mjs",
+    "predev": "node scripts/prepare-offline.mjs",
+    "prestart": "node scripts/prepare-offline.mjs",
+    "build:engine": "node scripts/build-engine.mjs",
+    "test:runtime": "node scripts/test-runtime.mjs",
+    "test:engine": "node scripts/qa-engine-stress.cjs",
+    "test:layouts": "node scripts/qa-layout-gallery.cjs",
+    "build:pages": "node scripts/build-pages.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}
